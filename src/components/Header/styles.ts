@@ -1,13 +1,23 @@
+import { ArrowLeft } from "phosphor-react-native";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-    width: 100%;
 
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
     
     margin-bottom: 36px;
 `;
 
 export const Logo = styled.Image``;
+
+export const BackButton = styled.TouchableOpacity`
+    position: absolute;
+    z-index: 1;
+    left: 0;
+`;
+
+export const BackIcon = styled(ArrowLeft).attrs(({ theme }) => ({
+    size: 24,
+    color: theme.COLORS.GREEN_DARK,
+    weight: 'bold'
+}))``;

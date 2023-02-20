@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { FlatList, SectionList } from "react-native";
+import { SectionList } from "react-native";
 
 import groupBy from 'lodash/groupBy'
 import { format } from 'date-fns'
 import { pt } from "date-fns/locale";
 
 import { Button } from "@components/Button";
-import { Header } from "@components/Header";
 import { Meal } from "@components/Meal";
-import { Statistics } from "@components/Statistics";
+import { HomeHeader } from "@components/HomeHeader";
+import { DietPercentage } from "@components/DietPercentage";
 
 
 import { Container, DayList, DayListDate, NewMeal, NewMealTitle } from "./styles";
@@ -34,10 +34,8 @@ export function Home() {
         const groupedMeals = Object.values(
             groupBy(meals, (meal) => (meal.date.substring(0, 10)))
         )
-        console.log(groupedMeals)
         var data: sectionListMeals[] = [];
         groupedMeals.map(d => {
-            console.log(d[0])
             let section = {
                 title: format(new Date(d[0].date), 'PPP', { locale: pt }),
                 data: [...d]
@@ -49,9 +47,9 @@ export function Home() {
 
     return (
         <Container>
-            <Header />
+            <HomeHeader />
 
-            <Statistics />
+            <DietPercentage showArrow />
 
             <NewMeal>
                 <NewMealTitle>Refeições</NewMealTitle>
@@ -77,21 +75,6 @@ export function Home() {
                     )}
                 />
             </DayList>
-
-            {/* <DayList>
-                <DayListDate>12.08.22</DayListDate>
-                <FlatList
-                    data={meals}
-                    keyExtractor={item => item.description}
-                    renderItem={({ item }) => (
-                        <Meal
-                            hour={item.hour}
-                            description={item.description}
-                            status={item.status}
-                        />
-                    )}
-                />
-            </DayList> */}
 
         </Container>
     )
