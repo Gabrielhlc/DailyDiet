@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 type Props = TouchableOpacityProps & {
     title: string;
     type?: ButtonTypeStyleProps;
-    icon: keyof typeof Ionicons.glyphMap;
+    icon?: keyof typeof Ionicons.glyphMap;
 }
 
 export function Button({ title, type = 'PRIMARY', icon, ...rest }: Props) {
@@ -15,7 +15,8 @@ export function Button({ title, type = 'PRIMARY', icon, ...rest }: Props) {
             type={type}
             {...rest}
         >
-            <ButtonIcon icon={icon} type={type} />
+            {icon === undefined ? "" : <ButtonIcon icon={icon} type={type} />}
+
             <Title> {title}</Title>
         </Container>
     )

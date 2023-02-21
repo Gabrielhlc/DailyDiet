@@ -3,7 +3,7 @@ import { ButtonIconTypeStyleProps, Container, Icon } from "./styles";
 import { Ionicons } from '@expo/vector-icons'
 
 type Props = {
-    icon: keyof typeof Ionicons.glyphMap;
+    icon?: keyof typeof Ionicons.glyphMap;
     type?: ButtonIconTypeStyleProps;
 }
 

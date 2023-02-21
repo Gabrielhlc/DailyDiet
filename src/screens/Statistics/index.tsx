@@ -1,6 +1,7 @@
 import { Card } from "@components/Card";
 import { DietPercentage } from "@components/DietPercentage";
 import { Header } from "@components/Header";
+
 import { Container, Body, StatisticsHeader, Title, Data, DataRow } from "./styles";
 
 export function Statistics() {
