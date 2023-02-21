@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SectionList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import groupBy from 'lodash/groupBy'
 import { format } from 'date-fns'
@@ -9,7 +10,6 @@ import { Button } from "@components/Button";
 import { Meal } from "@components/Meal";
 import { HomeHeader } from "@components/HomeHeader";
 import { DietPercentage } from "@components/DietPercentage";
-
 
 import { Container, DayList, DayListDate, NewMeal, NewMealTitle } from "./styles";
 
@@ -29,6 +29,12 @@ type sectionListMeals = {
 export function Home() {
     const [meals, setMeals] = useState<Meal[]>([{ date: Date(), hour: '20:30', description: 'Salada cesar com frango grelhado', status: true }, { date: 'Fri Feb 18 2023 18:15:48 GMT-0300 (-03)', hour: '22:30', description: 'Vitamina de banana com Whey protein', status: true }]);
     const [sectionListMeals, setSectionListMeals] = useState<sectionListMeals[]>([]);
+
+    const navigation = useNavigation();
+
+    function handleNewMeal() {
+        navigation.navigate('new');
+    }
 
     useEffect(() => {
         const groupedMeals = Object.values(
@@ -56,6 +62,7 @@ export function Home() {
                 <Button
                     icon="add"
                     title="Nova refeição"
+                    onPress={handleNewMeal}
                 />
             </NewMeal>
 

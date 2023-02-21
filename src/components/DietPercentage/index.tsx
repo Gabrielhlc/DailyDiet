@@ -1,15 +1,24 @@
 import { Arrow, Button, Container, Subtitle, Title } from "./styles";
+import { TouchableOpacityProps } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-type Props = {
+type Props = TouchableOpacityProps & {
     showArrow?: boolean;
 }
 
-export function DietPercentage({ showArrow = false }: Props) {
+export function DietPercentage({ showArrow = false, ...rest }: Props) {
+
+    const navigation = useNavigation();
+
+    function handleStatistics() {
+        navigation.navigate('statistics')
+    }
+
     return (
         <Container>
 
             {showArrow && (
-                <Button>
+                <Button {...rest} onPress={handleStatistics}>
                     <Arrow />
                 </Button>
             )}
