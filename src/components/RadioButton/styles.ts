@@ -5,6 +5,7 @@ export type RadioButtonTypeStyleProps = 'PRIMARY' | 'SECONDARY';
 
 type Props = {
     type?: RadioButtonTypeStyleProps;
+    isActive: boolean;
 }
 
 export const Container = styled(TouchableOpacity) <Props>`
@@ -16,7 +17,8 @@ export const Container = styled(TouchableOpacity) <Props>`
 
     padding: 16px;
 
-    background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+    background-color: ${({ theme, type, isActive }) => isActive ? (type === 'PRIMARY' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT) : theme.COLORS.GRAY_6};
+    border: ${({ theme, type, isActive }) => isActive ? (type === 'PRIMARY' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK) : 0};
     border-radius: 6px;
 `;
 

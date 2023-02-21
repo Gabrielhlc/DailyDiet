@@ -6,8 +6,15 @@ import { Input } from "@components/Input";
 import { RadioButton } from "@components/RadioButton";
 
 import { Body, ButtonContainer, Container, InputRow, RadiosTitle } from "./styles";
+import { useState } from "react";
 
 export function NewMeal() {
+    const [isDiet, setIsDiet] = useState<string>();
+
+    function handleIsDiet(button: string) {
+        setIsDiet(button)
+    }
+
     return (
         <Container>
             <Header />
@@ -44,13 +51,16 @@ export function NewMeal() {
                     <View style={{ flex: 1, marginRight: 10 }}>
                         <RadioButton
                             title="Sim"
-                            type="PRIMARY"
+                            isActive={isDiet === 'yes'}
+                            onPress={() => handleIsDiet('yes')}
                         />
                     </View>
                     <View style={{ flex: 1, marginLeft: 10 }}>
                         <RadioButton
-                            title="Não"
                             type="SECONDARY"
+                            title="Não"
+                            isActive={isDiet === 'no'}
+                            onPress={() => handleIsDiet('no')}
                         />
                     </View>
                 </InputRow>
