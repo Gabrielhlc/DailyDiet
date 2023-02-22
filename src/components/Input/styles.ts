@@ -19,6 +19,8 @@ export const TextInput = styled.TextInput`
     width: 100%;
 
     padding: 14px;
+    /* text-align: left; */
+    
 
     border: 1px solid ${({ theme }) => theme.COLORS.GRAY_5};
     border-radius: 6px;

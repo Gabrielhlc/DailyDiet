@@ -13,7 +13,12 @@ export function Input({ label, numberOfLines, error = '', touched, ...rest }: Pr
         <Container>
             <Label>{label}</Label>
 
-            <TextInput numberOfLines={numberOfLines} {...rest} />
+            {numberOfLines === 1 ?
+                <TextInput numberOfLines={numberOfLines} {...rest} />
+                :
+                <TextInput numberOfLines={numberOfLines} {...rest} textAlignVertical={'top'} />
+            }
+
 
             {(error && touched) && <ErrorMessage>{error}</ErrorMessage>}
         </Container>
