@@ -1,18 +1,18 @@
 import { TouchableOpacityProps } from "react-native";
-import { Container, Description, Hour, Status } from "./styles";
+import { Container, Description, Hour, InDiet } from "./styles";
 
 type Props = TouchableOpacityProps & {
-    hour: string;
+    time: string;
     description: string;
-    status: boolean;
+    inDiet: boolean;
 }
 
-export function Meal({ hour, description, status, ...rest }: Props) {
+export function Meal({ time, description, inDiet, ...rest }: Props) {
     return (
         <Container {...rest}>
-            <Hour>{hour}</Hour>
+            <Hour>{time}</Hour>
             <Description numberOfLines={1}>{description}</Description>
-            <Status status={status} />
+            <InDiet inDiet={inDiet} />
         </Container>
     )
 }

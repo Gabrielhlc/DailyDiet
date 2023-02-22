@@ -3,7 +3,7 @@ import styled, { css } from "styled-components/native";
 
 
 type Props = {
-    status: boolean;
+    inDiet: boolean;
 }
 
 export const Container = styled(TouchableOpacity)`
@@ -49,10 +49,10 @@ export const Description = styled.Text`
     ` }
 `;
 
-export const Status = styled.View <Props>`
+export const InDiet = styled.View <Props>`
     width: 14px;
     height: 14px;
 
-    background-color: ${({ theme, status }) => status ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
+    background-color: ${({ theme, inDiet }) => inDiet ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
     border-radius: 999px;
 `;

@@ -24,3 +24,11 @@ export const TextInput = styled.TextInput`
     border-radius: 6px;
 
 `;
+
+export const ErrorMessage = styled.Text`
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.SM}px;
+    color: ${theme.COLORS.RED_DARK};
+    font-family: ${theme.FONT_FAMILY.BOLD};
+  `};
+`;
