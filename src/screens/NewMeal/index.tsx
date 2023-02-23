@@ -6,15 +6,15 @@ import * as yup from "yup";
 import moment from "moment";
 import { useFormik } from "formik";
 
+import { mealCreate } from "@storage/meal/mealCreate";
+import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
+
 import { Button } from "@components/Button";
 import { Header } from "@components/Header";
 import { Input } from "@components/Input";
 import { RadioButton } from "@components/RadioButton";
 
-import { mealCreate } from "@storage/meal/mealCreate";
-
 import { Body, ButtonContainer, Container, InputRow, RadiosTitle } from "./styles";
-import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
 
 export function NewMeal() {
     const [inDiet, setInDiet] = useState<string>();
@@ -83,9 +83,8 @@ export function NewMeal() {
         try {
             await mealCreate(newMeal);
 
+            navigation.navigate('feedback', { inDiet: inDiet! });
             setInDiet(undefined);
-
-            navigation.navigate('home');
         } catch (error) {
             Alert.alert('Nova refeição', 'Não foi possível adicionar a refeição.');
         }

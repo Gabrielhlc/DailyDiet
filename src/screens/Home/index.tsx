@@ -6,23 +6,23 @@ import groupBy from 'lodash/groupBy'
 import { format } from 'date-fns'
 import { pt } from "date-fns/locale";
 
+import { mealsGetAll } from "@storage/meal/mealsGetAll";
+import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
+
 import { Button } from "@components/Button";
 import { Meal } from "@components/Meal";
 import { HomeHeader } from "@components/HomeHeader";
 import { DietPercentage } from "@components/DietPercentage";
+import { Loading } from "@components/Loading";
+
 
 import { Container, DayList, DayListDate, NewMeal, NewMealTitle } from "./styles";
-import { mealsGetAll } from "@storage/meal/mealsGetAll";
-import { Loading } from "@components/Loading";
-import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
-
 
 type sectionListMeals = {
     title: string;
     data: MealStorageDTO[]
 }
 
-// [{ name: 'Salada', date: Date(), time: '20:30', description: 'Salada cesar com frango grelhado', inDiet: true }, { name: 'Vitamina', date: 'Fri Feb 18 2023 18:15:48 GMT-0300 (-03)', time: '22:30', description: 'Vitamina de banana com Whey protein', inDiet: true }]
 export function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [meals, setMeals] = useState<MealStorageDTO[]>([]);
@@ -97,7 +97,7 @@ export function Home() {
                         renderItem={({ item }) => (
                             <Meal
                                 time={item.time}
-                                description={item.description}
+                                name={item.name}
                                 inDiet={item.inDiet}
                             />
                         )}

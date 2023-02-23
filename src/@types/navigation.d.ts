@@ -4,6 +4,9 @@ export declare global {
             home: undefined;
             new: undefined;
             statistics: undefined;
+            feedback: {
+                inDiet: string;
+            };
         }
     }
 }

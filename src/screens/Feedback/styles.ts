@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components/native";
 
-export type TitleTypeStyleProps = 'PRIMARY' | 'SECONDARY';
+export type isInDietProps = 'yes' | 'no';
 
 type Props = {
-    type: TitleTypeStyleProps;
+    inDiet: isInDietProps;
 }
 
 export const Container = styled.View`
@@ -17,24 +17,22 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text<Props>`
-    ${({ theme, type }) => css`
-        color: ${type === 'PRIMARY' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
+    ${({ theme, inDiet }) => css`
+        color: ${inDiet === 'yes' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
         font-family: ${theme.FONT_FAMILY.BOLD};
         font-size: ${theme.FONT_SIZE.LG}px;
     `}
-
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 8px;
 `;
 
-export const Subtitle = styled.Text`
+export const Description = styled.Text`
     ${({ theme }) => css`
         color: ${theme.COLORS.GRAY_1};
         font-family: ${theme.FONT_FAMILY.REGULAR};
         font-size: ${theme.FONT_SIZE.MD}px;
     `}
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    margin-bottom: 32px;
 `;
 
 export const Illustration = styled.Image`
