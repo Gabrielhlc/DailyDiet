@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import * as yup from "yup";
 import moment from "moment";
@@ -15,11 +15,23 @@ import { Input } from "@components/Input";
 import { RadioButton } from "@components/RadioButton";
 
 import { Body, ButtonContainer, Container, InputRow, RadiosTitle } from "./styles";
+import { mealEdit } from "@storage/meal/mealEdit";
+
+type RouteParams = {
+    mealParams: MealStorageDTO;
+}
 
 export function NewMeal() {
     const [inDiet, setInDiet] = useState<string>();
+    const [isNewMeal, setIsNewMeal] = useState<boolean>(false);
+    const [headerTitle, setHeaderTitle] = useState<string>('');
+    const [buttonTitle, setButtonTitle] = useState<string>('');
 
     const navigation = useNavigation();
+
+    const route = useRoute();
+
+    const { mealParams } = route.params as RouteParams
 
     const ValidationSchema = yup.object().shape({
         name: yup
@@ -57,17 +69,17 @@ export function NewMeal() {
     const { handleChange, values, handleSubmit, handleBlur, isValid, errors, touched } = useFormik({
         validationSchema: ValidationSchema,
         initialValues: {
-            name: '',
-            description: '',
-            date: '',
-            time: '',
-            inDiet: false
+            name: mealParams.name,
+            description: mealParams.description,
+            date: mealParams.date,
+            time: mealParams.time,
+            inDiet: mealParams.inDiet
         },
         onSubmit: values => { handleFormSubmit(values) }
     });
 
     async function handleFormSubmit(values: MealStorageDTO) {
-        if (inDiet === null) {
+        if (inDiet === undefined) {
             Alert.alert('Nova Refeição', 'Para cadastrar, informe se a refeição está dentro da dieta.')
             return;
         }
@@ -81,7 +93,7 @@ export function NewMeal() {
         }
 
         try {
-            await mealCreate(newMeal);
+            isNewMeal ? await mealCreate(newMeal) : await mealEdit(newMeal);
 
             navigation.navigate('feedback', { inDiet: inDiet! });
             setInDiet(undefined);
@@ -94,9 +106,20 @@ export function NewMeal() {
         setInDiet(button)
     }
 
+    useEffect(() => {
+        mealParams.name === '' ? (
+            setIsNewMeal(true),
+            setHeaderTitle('Nova refeição'),
+            setButtonTitle('Cadastrar refeição')
+        ) : (
+            setHeaderTitle('Editar refeição'),
+            setButtonTitle('Salvar alterações')
+        );
+    }, [])
+
     return (
         <Container>
-            <Header title="Nova refeição" />
+            <Header title={headerTitle} />
 
             <Body>
 
@@ -113,6 +136,7 @@ export function NewMeal() {
                 <Input
                     label="Descrição"
                     numberOfLines={5}
+                    multiline
                     value={values.description}
                     onChangeText={handleChange('description')}
                     onBlur={handleBlur('description')}
@@ -165,7 +189,7 @@ export function NewMeal() {
                 </InputRow>
 
                 <ButtonContainer>
-                    <Button title="Cadastrar refeição" onPress={() => handleSubmit()} />
+                    <Button disabled={!isValid || inDiet == undefined} title={buttonTitle} onPress={() => handleSubmit()} />
                 </ButtonContainer>
 
             </Body>

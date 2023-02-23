@@ -30,7 +30,7 @@ export function Home() {
     const navigation = useNavigation();
 
     function handleNewMeal() {
-        navigation.navigate('new');
+        navigation.navigate('new', { mealParams: { name: '', description: '', date: '', time: '', inDiet: false } });
     }
 
     async function fetchMeals() {

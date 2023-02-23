@@ -43,6 +43,10 @@ export function Meal() {
         }
     }
 
+    function handleEditMeal() {
+        navigation.navigate('new', { mealParams: meal })
+    }
+
     function handleRemoveMeal() {
         Alert.alert(
             'Remover',
@@ -79,6 +83,7 @@ export function Meal() {
                     <Button
                         icon="pencil"
                         title="Editar refeição"
+                        onPress={handleEditMeal}
                     />
                     <Button
                         icon="trash"
