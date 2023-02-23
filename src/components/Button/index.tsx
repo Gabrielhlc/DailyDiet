@@ -1,7 +1,9 @@
-import { ButtonIcon } from "@components/ButtonIcon";
 import { TouchableOpacityProps } from "react-native";
-import { ButtonTypeStyleProps, Container, Title } from "./styles";
 import { Ionicons } from '@expo/vector-icons'
+
+import { ButtonIcon } from "@components/ButtonIcon";
+
+import { ButtonTypeStyleProps, Container, Title } from "./styles";
 
 type Props = TouchableOpacityProps & {
     title: string;
@@ -17,7 +19,7 @@ export function Button({ title, type = 'PRIMARY', icon, ...rest }: Props) {
         >
             {icon === undefined ? "" : <ButtonIcon icon={icon} type={type} />}
 
-            <Title> {title}</Title>
+            <Title type={type}> {title}</Title>
         </Container>
     )
 }

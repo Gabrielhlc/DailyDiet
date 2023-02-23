@@ -1,8 +1,5 @@
 import styled from "styled-components/native";
-
 import { Ionicons } from '@expo/vector-icons'
-
-import { } from 'phosphor-react-native'
 
 export type ButtonIconTypeStyleProps = 'PRIMARY' | 'SECONDARY';
 

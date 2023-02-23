@@ -15,7 +15,6 @@ import { HomeHeader } from "@components/HomeHeader";
 import { DietPercentage } from "@components/DietPercentage";
 import { Loading } from "@components/Loading";
 
-
 import { Container, DayList, DayListDate, NewMeal, NewMealTitle } from "./styles";
 
 type sectionListMeals = {
@@ -47,6 +46,10 @@ export function Home() {
         }
     }
 
+    function handleOpenMeal(meal: MealStorageDTO) {
+        navigation.navigate('meal', { meal })
+    }
+
     useEffect(() => {
         const groupedMeals = Object.values(
             groupBy(meals, (meal) => (meal.date.substring(0, 10)))
@@ -76,7 +79,6 @@ export function Home() {
             <HomeHeader />
 
             <DietPercentage showArrow />
-            {/* <Button title="sim" onPress={() => AsyncStorage.clear()} /> */}
 
             <NewMeal>
                 <NewMealTitle>Refeições</NewMealTitle>
@@ -99,6 +101,7 @@ export function Home() {
                                 time={item.time}
                                 name={item.name}
                                 inDiet={item.inDiet}
+                                onPress={() => handleOpenMeal(item)}
                             />
                         )}
                         renderSectionHeader={({ section: { title } }) => (
