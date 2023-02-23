@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import { ArrowLeft } from "phosphor-react-native";
 
@@ -6,7 +6,6 @@ export const Container = styled.View`
 
     align-items: center;
     
-    margin-bottom: 36px;
 `;
 
 export const Logo = styled.Image``;
@@ -17,8 +16,20 @@ export const BackButton = styled(TouchableOpacity)`
     left: 0;
 `;
 
+export const Title = styled.Text`
+    ${({ theme }) => css`
+        color: ${theme.COLORS.GRAY_1};
+        font-family: ${theme.FONT_FAMILY.BOLD};
+        font-size: ${theme.FONT_SIZE.LG}px;
+    ` }
+    margin-bottom: 24px;
+`;
+
 export const BackIcon = styled(ArrowLeft).attrs(({ theme }) => ({
     size: 24,
-    color: theme.COLORS.GREEN_DARK,
+    color: theme.COLORS.GRAY_2,
     weight: 'bold'
 }))``;
+
+
+

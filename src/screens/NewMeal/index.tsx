@@ -96,7 +96,7 @@ export function NewMeal() {
 
     return (
         <Container>
-            <Header />
+            <Header title="Nova refeição" />
 
             <Body>
 

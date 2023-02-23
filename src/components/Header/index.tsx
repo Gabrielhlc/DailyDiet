@@ -1,11 +1,13 @@
 import { TouchableOpacityProps } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { BackButton, BackIcon, Container } from "./styles";
+import { BackButton, BackIcon, Container, Title } from "./styles";
 
-type Props = TouchableOpacityProps & {}
+type Props = TouchableOpacityProps & {
+    title?: string;
+}
 
-export function Header({ ...rest }: Props) {
+export function Header({ title = '', ...rest }: Props) {
 
     const navigation = useNavigation();
 
@@ -18,6 +20,8 @@ export function Header({ ...rest }: Props) {
             <BackButton {...rest} onPress={handleGoHome}>
                 <BackIcon />
             </BackButton>
+
+            {title && <Title>{title}</Title>}
         </Container>
     )
 }

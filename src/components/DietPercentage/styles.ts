@@ -10,6 +10,7 @@ export const Container = styled.View`
     align-items: center;
     
     padding: 20px 16px;
+    margin-top: 36px;
     margin-bottom: 40px;
 
     background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};

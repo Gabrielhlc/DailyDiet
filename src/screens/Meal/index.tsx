@@ -7,7 +7,18 @@ import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
 import { Button } from "@components/Button";
 import { Header } from "@components/Header";
 
-import { Body, ButtonsContainer, Container, DateAndTimeInfo, DateAndTimeTitle, Description, Name, Status, Tag, TagText } from "./styles";
+import {
+    Body,
+    ButtonsContainer,
+    Container,
+    DateAndTimeInfo,
+    DateAndTimeTitle,
+    Description,
+    Name,
+    Status,
+    Tag,
+    TagText
+} from "./styles";
 
 type RouteParams = {
     meal: MealStorageDTO;
@@ -46,7 +57,7 @@ export function Meal() {
     return (
         <Container inDiet={inDiet}>
 
-            <Header />
+            <Header title="Refeição" />
 
             <Body>
                 <Name>{name}</Name>
