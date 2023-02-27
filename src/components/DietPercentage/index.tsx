@@ -1,12 +1,26 @@
-import { Arrow, Button, Container, Subtitle, Title } from "./styles";
+import { useCallback, useState } from "react";
 import { TouchableOpacityProps } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+
+import { statisticsGetStats, Stats } from "@utils/statisticsGetStats";
+
+import { Arrow, Button, Container, Subtitle, Title } from "./styles";
 
 type Props = TouchableOpacityProps & {
     showArrow?: boolean;
 }
 
 export function DietPercentage({ showArrow = false, ...rest }: Props) {
+    const [stats, setStats] = useState<Stats>(Object);
+
+    async function fetchStats() {
+        try {
+            const stats = await statisticsGetStats();
+            setStats(stats)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const navigation = useNavigation();
 
@@ -14,15 +28,21 @@ export function DietPercentage({ showArrow = false, ...rest }: Props) {
         navigation.navigate('statistics')
     }
 
+    useFocusEffect(useCallback(() => {
+        fetchStats();
+    }, []));
+
     return (
-        <Container>
+        <Container percentage={stats!.percentage}>
 
             {showArrow && (
                 <Button {...rest} onPress={handleStatistics}>
                     <Arrow />
                 </Button>
             )}
-            <Title>90,86%</Title>
+            <Title>
+                {stats!.percentage}%
+            </Title>
             <Subtitle>das refeições dentro da dieta</Subtitle>
         </Container>
     )

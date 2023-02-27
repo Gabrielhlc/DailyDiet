@@ -1,15 +1,19 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled(SafeAreaView)`
+type Props = {
+    percentage: number;
+}
+
+export const Container = styled(SafeAreaView) <Props>`
     flex: 1;
-    background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+    background-color: ${({ theme, percentage }) => percentage > 66.66 ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     padding: 0 18px;
 `;
 
 export const StatisticsHeader = styled.View`
-    top: -40px; /* bring together BackIcon and DietPercentage */
-    margin-bottom: -56px;
+    margin-top: -8px;
+    margin-bottom: 16px;
 `;
 
 export const Body = styled.View`
@@ -35,14 +39,7 @@ export const Title = styled.Text`
     margin-bottom: 24px;
 `;
 
-export const Data = styled.View`
-    width: 100%;
-
-    align-items: center;
-`;
-
 export const DataRow = styled.View`
     width: 100%;
     flex-direction: row;
-    align-items: center;
 `;

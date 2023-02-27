@@ -50,7 +50,8 @@ export function Home() {
         navigation.navigate('meal', { meal })
     }
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
+        fetchMeals();
         const groupedMeals = Object.values(
             groupBy(meals, (meal) => (meal.date.substring(0, 10)))
         )
@@ -67,11 +68,7 @@ export function Home() {
             };
             data.push(section);
         });
-        setSectionListMeals(data)
-    }, [meals])
-
-    useFocusEffect(useCallback(() => {
-        fetchMeals();
+        setSectionListMeals(data.reverse())
     }, []));
 
     return (

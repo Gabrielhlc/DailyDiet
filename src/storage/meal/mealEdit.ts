@@ -8,12 +8,12 @@ export async function mealEdit(newMeal: MealStorageDTO) {
     try {
         const storedMeals = await mealsGetAll();
 
-        const filteredMeals = storedMeals.filter(meal => meal.name !== newMeal.name);
+        const filteredMeals = storedMeals.filter(meal => (meal.name !== newMeal.name) && (meal.date !== newMeal.date) && (meal.time !== newMeal.time));
 
         await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify(filteredMeals));
         await AsyncStorage.removeItem(`${MEAL_COLLECTION}-${newMeal}`)
 
-        const storage = JSON.stringify([...storedMeals, newMeal]);
+        const storage = JSON.stringify([...filteredMeals, newMeal]);
         await AsyncStorage.setItem(MEAL_COLLECTION, storage);
 
     } catch (error) {

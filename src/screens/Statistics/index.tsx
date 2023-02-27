@@ -1,12 +1,32 @@
+import { useCallback, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+
+import { statisticsGetStats, Stats } from "@utils/statisticsGetStats";
+
 import { Card } from "@components/Card";
 import { DietPercentage } from "@components/DietPercentage";
 import { Header } from "@components/Header";
 
-import { Container, Body, StatisticsHeader, Title, Data, DataRow } from "./styles";
+import { Container, Body, StatisticsHeader, Title, DataRow } from "./styles";
 
 export function Statistics() {
+    const [stats, setStats] = useState<Stats>(Object);
+
+    async function fetchStats() {
+        try {
+            const stats = await statisticsGetStats();
+            setStats(stats)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useFocusEffect(useCallback(() => {
+        fetchStats();
+    }, []));
+
     return (
-        <Container>
+        <Container percentage={stats.percentage}>
 
             <Header />
             <StatisticsHeader>
@@ -18,29 +38,29 @@ export function Statistics() {
                     Estatísticas gerais
                 </Title>
 
-                <Data>
-                    <DataRow>
-                        <Card
-                            number="22"
-                            description="melhor sequência de pratos dentro da dieta"
-                        />
-                    </DataRow>
-                    <DataRow>
-                        <Card
-                            number="109"
-                            description="refeições registradas"
-                        />
-                    </DataRow>
-                </Data>
+                <DataRow>
+                    <Card
+                        number={stats.inDietStreak}
+                        description="melhor sequência de pratos dentro da dieta"
+                    />
+                </DataRow>
+
+                <DataRow>
+                    <Card
+                        number={stats.meals}
+                        description="refeições registradas"
+                    />
+                </DataRow>
+
                 <DataRow>
                     <Card
                         type="SUCCESS"
-                        number="99"
+                        number={stats.inDietMeals}
                         description="refeições dentro da dieta"
                     />
                     <Card
                         type="DANGER"
-                        number="10"
+                        number={stats.outDietMeals}
                         description="refeições fora da dieta"
                     />
                 </DataRow>

@@ -93,9 +93,17 @@ export function NewMeal() {
         }
 
         try {
-            isNewMeal ? await mealCreate(newMeal) : await mealEdit(newMeal);
+            isNewMeal ?
+                (
+                    await mealCreate(newMeal),
+                    navigation.navigate('feedback', { inDiet: inDiet! })
+                )
+                :
+                (
+                    await mealEdit(newMeal),
+                    navigation.navigate('home')
+                )
 
-            navigation.navigate('feedback', { inDiet: inDiet! });
             setInDiet(undefined);
         } catch (error) {
             Alert.alert('Nova refeição', 'Não foi possível adicionar a refeição.');

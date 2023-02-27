@@ -2,18 +2,17 @@ import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from 'phosphor-react-native'
 
-export const Container = styled.View`
-    width: 100%;
+type Props = {
+    percentage: number;
+}
 
-    height: 102px;
+export const Container = styled.View<Props>`
 
     align-items: center;
     
     padding: 20px 16px;
-    margin-top: 36px;
-    margin-bottom: 40px;
 
-    background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+    background-color: ${({ theme, percentage }) => percentage > 66.66 ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     border-radius: 8px;
 `;
 

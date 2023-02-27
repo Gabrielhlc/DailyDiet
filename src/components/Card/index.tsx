@@ -2,7 +2,7 @@ import { CardTypeStyleProps, Container, Description, Number } from "./styles";
 
 type Props = {
     type?: CardTypeStyleProps;
-    number: string;
+    number: number;
     description: string;
 }
 

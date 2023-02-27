@@ -27,7 +27,7 @@ export const Number = styled.Text`
         font-family: ${theme.FONT_FAMILY.BOLD};
         font-size: ${theme.FONT_SIZE.XL}px;
     `}
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 `;
 
 export const Description = styled.Text`
